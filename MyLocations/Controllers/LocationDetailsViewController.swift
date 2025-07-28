@@ -50,13 +50,22 @@ class LocationDetailsViewController: UITableViewController {
         
         dateLabel.text = format(date: Date())
         
+        
+            // Hide keyboard
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        gestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(gestureRecognizer)
+        
+        
     }
     
     
     
     // MARK: - Actions
     @IBAction func done() {
-        navigationController?.popViewController(animated: true)
+        guard let mainView = navigationController?.parent?.view else {return}
+        let hudView = HudView.hud(inView: mainView, animated: true)
+        hudView.text = "Tagged"
     }
     
     @IBAction func cancel() {
@@ -69,6 +78,15 @@ class LocationDetailsViewController: UITableViewController {
         categoryLabel.text = categoryName
     }
     
+    @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        
+        if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+            return
+        }
+        descriptionTextView.resignFirstResponder()
+    }
     
     
     // MARK: - Hepler Metgonds
