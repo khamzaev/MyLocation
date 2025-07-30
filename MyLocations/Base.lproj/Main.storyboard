@@ -182,7 +182,7 @@
                             <tableViewSection id="mxv-5l-Ccv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="d9g-n4-zUf">
-                                        <rect key="frame" x="0.0" y="222.9999980926514" width="402" height="43.666667938232393"/>
+                                        <rect key="frame" x="0.0" y="222.99999809265137" width="402" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d9g-n4-zUf" id="93C-5J-szY">
                                             <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="43.666667938232422"/>
@@ -427,7 +427,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemFillColor">
-            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
