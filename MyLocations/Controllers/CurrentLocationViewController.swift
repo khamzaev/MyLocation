@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreLocation
+import CoreData
+
 
 class CurrentLocationViewController: UIViewController , CLLocationManagerDelegate {
     
@@ -17,9 +19,11 @@ class CurrentLocationViewController: UIViewController , CLLocationManagerDelegat
     @IBOutlet weak var tagButton: UIButton!
     @IBOutlet weak var getButton: UIButton!
     
+    
     let locationManager = CLLocationManager()
     let geocoder = CLGeocoder()
     var placemark: CLPlacemark?
+    var managedObjectContext: NSManagedObjectContext!
     var performingReverseGeocoding = false
     var lastGeocodingError: Error?
     var location: CLLocation?
@@ -298,6 +302,7 @@ class CurrentLocationViewController: UIViewController , CLLocationManagerDelegat
             let controller = segue.destination as! LocationDetailsViewController
             controller.coordinate = location!.coordinate
             controller.placemark = placemark
+            controller.managedObjectContext = managedObjectContext
         }
     }
 
