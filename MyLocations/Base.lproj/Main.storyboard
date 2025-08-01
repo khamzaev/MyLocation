@@ -182,7 +182,7 @@
                             <tableViewSection id="mxv-5l-Ccv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="d9g-n4-zUf">
-                                        <rect key="frame" x="0.0" y="222.99999809265137" width="402" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="222.9999980926514" width="402" height="43.666667938232393"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d9g-n4-zUf" id="93C-5J-szY">
                                             <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="43.666667938232422"/>
@@ -337,7 +337,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUM-EN-znR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2789.5522388059699" y="-2.0594965675057209"/>
+            <point key="canvasLocation" x="2830" y="305"/>
         </scene>
         <!--Category Picker View Controller-->
         <scene sceneID="UPy-pf-GCP">
@@ -379,7 +379,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxo-ln-KBy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="x5s-AU-oDk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3649" y="-2"/>
+            <point key="canvasLocation" x="3684" y="305"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rQH-uh-bcq">
@@ -428,7 +428,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="65" id="85d-G7-9ax">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="65" id="85d-G7-9ax" customClass="LocationCell" customModule="MyLocations" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="402" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="85d-G7-9ax" id="oTf-EA-iWo">
@@ -459,6 +459,11 @@
                                         <constraint firstItem="F3c-zI-MRa" firstAttribute="top" secondItem="oTf-EA-iWo" secondAttribute="topMargin" constant="11" id="wls-W9-AHA"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="addressLabel" destination="F3c-zI-MRa" id="kah-so-GQs"/>
+                                    <outlet property="descriptionLabel" destination="xGw-kj-h4D" id="2Wn-Lw-bMp"/>
+                                    <segue destination="3hI-eR-l58" kind="show" identifier="EditLocation" id="xkZ-LX-0WO"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -490,6 +495,9 @@
             <point key="canvasLocation" x="1031" y="670"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="xkZ-LX-0WO"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

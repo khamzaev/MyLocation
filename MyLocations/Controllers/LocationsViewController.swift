@@ -51,30 +51,29 @@ class LocationsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "LocationCell",
             for: indexPath
-        )
+        ) as! LocationCell
         
         let location = locations[indexPath.row]
+        cell.configure(for: location)
         
-        let descriptionLabel = cell.viewWithTag(100) as! UILabel
-        descriptionLabel.text = location.locationDescription
-        
-        let addressLabel = cell.viewWithTag(101) as! UILabel
-        if let placemark = location.placemark {
-            var text = ""
-            if let tmp = placemark.subThoroughfare {
-                text += tmp + " "
-            }
-            if let tmp = placemark.thoroughfare {
-                text += tmp + ", "
-            }
-            if let tmp = placemark.locality {
-                text += tmp
-            }
-            addressLabel.text = text
-        } else {
-            addressLabel.text = ""
-        }
         return cell
+        
+    }
+    
+    
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditLocation" {
+            let controller = segue.destination as! LocationDetailsViewController
+            controller.managedObjectContext = managedObjectContext
+            
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                let location = locations[indexPath.row]
+                controller.locationToEdit = location
+            }
+        }
     }
     
 }
