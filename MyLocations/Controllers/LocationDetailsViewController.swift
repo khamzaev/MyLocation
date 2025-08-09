@@ -37,6 +37,7 @@ class LocationDetailsViewController: UITableViewController {
     var date = Date()
     var descriptionText = ""
     var image: UIImage?
+    var observer: Any?
     var locationToEdit: Location? {
         didSet{
             if let location = locationToEdit {
@@ -55,6 +56,11 @@ class LocationDetailsViewController: UITableViewController {
         
         if let location = locationToEdit {
             title = "Edit Location"
+            if location.hasPhoto {
+                if let theImage = location.photoImage {
+                    show(image: theImage)
+                }
+            }
         }
         
         descriptionTextView.text = descriptionText
@@ -76,6 +82,7 @@ class LocationDetailsViewController: UITableViewController {
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
         
+        listenForBackgroundNotification()
         
     }
     
@@ -87,13 +94,32 @@ class LocationDetailsViewController: UITableViewController {
         let hudView = HudView.hud(inView: mainView, animated: true)
         
         let location: Location
+
+        
         if let temp = locationToEdit {
             hudView.text = "Updated"
             location = temp
         } else {
             hudView.text = "Tagged"
             location = Location(context: managedObjectContext)
+            location.photoID = nil
         }
+        
+        
+        // Save image
+        if let image = image {
+            if !location.hasPhoto {
+                location.photoID = Location.nextPhotoID() as NSNumber
+            }
+            if let data = image.jpegData(compressionQuality: 0.5) {
+                do {
+                    try data.write(to: location.photoURL, options: .atomic)
+                } catch {
+                    print("Error writing file: \(error)")
+                }
+            }
+        }
+        
         
         location.locationDescription = descriptionTextView.text
         location.category = categoryName
@@ -207,6 +233,29 @@ class LocationDetailsViewController: UITableViewController {
         addPhotoLabel.text = ""
         imageHeight.constant = 260
         tableView.reloadData()
+    }
+    
+    
+    func listenForBackgroundNotification() {
+        observer = NotificationCenter.default.addObserver(
+            forName: UIScene.didEnterBackgroundNotification,
+            object: nil,
+            queue: OperationQueue.main
+        ) { [weak self] _ in
+            
+            if let weakSelf = self {
+                if weakSelf.presentedViewController != nil {
+                    weakSelf.dismiss(animated: false, completion: nil)
+                }
+                weakSelf.descriptionTextView.resignFirstResponder()
+        }
+      }
+    }
+    
+    
+    deinit {
+        print("*** deinit \(self)")
+        NotificationCenter.default.removeObserver(observer!)
     }
 }
 
